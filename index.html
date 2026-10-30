@@ -4,189 +4,133 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#102c4c">
-<title>プロ野球育成記録｜プロトタイプ</title>
+<title>プロ野球育成記録</title>
 <style>
-:root{--navy:#102c4c;--blue:#1f5f99;--sky:#e9f3fb;--gold:#f3c65e;--ink:#172638;--muted:#627387;--line:#dbe4ed;--white:#fff;--green:#237c59;--red:#b94b4b}
-*{box-sizing:border-box} body{margin:0;background:#eef3f8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
-button{font:inherit;cursor:pointer} .app{max-width:760px;margin:auto;min-height:100dvh;background:#f8fafc;padding-bottom:24px}
-.top{background:linear-gradient(135deg,#102c4c,#1d5684);color:#fff;padding:18px 16px 20px;border-bottom:4px solid var(--gold)}
-.brand{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.12em;color:#dceaf8;font-weight:800}
-.logo{display:grid;place-items:center;background:var(--gold);color:var(--navy);width:34px;height:34px;border-radius:10px;font-size:19px}
-h1{font-size:22px;margin:14px 0 5px;line-height:1.3} .subtitle{font-size:12px;color:#dceaf8}
-.seasonrow{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.pill{background:#ffffff18;border:1px solid #ffffff35;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
-main{padding:14px;display:grid;gap:13px}
-.card{background:white;border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 3px 10px #102c4c08}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
-.sectionhead h2{font-size:15px;margin:0}.tag{font-size:10px;background:var(--sky);color:var(--blue);padding:5px 8px;border-radius:999px;font-weight:800}
-.player{display:flex;gap:13px;align-items:center}
-.avatar{width:72px;height:82px;flex-shrink:0;border-radius:14px;background:linear-gradient(150deg,#d8e9f6,#9dc3e0);display:grid;place-items:center;font-size:38px}
-.player h2{margin:0 0 5px;font-size:18px}.player p{font-size:12px;color:var(--muted);margin:3px 0}
-.traits{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.trait{font-size:11px;padding:5px 7px;border-radius:7px;background:#fff7df;color:#805e0b;border:1px solid #f2df9d}
-.meter{height:9px;background:#e8eef4;border-radius:999px;overflow:hidden;margin-top:6px}.meter span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#4a91ca,#24649d)}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{padding:10px;border:1px solid var(--line);border-radius:12px}.statline{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700}.num{font-size:17px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
-.small{font-size:11px;color:var(--muted)}
-.energy{height:9px;background:#e8eef4;border-radius:999px;overflow:hidden;flex:1}.energy span{display:block;height:100%;background:#3caa78;border-radius:999px}
-.energyrow{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:12px;font-weight:700}
-.choices{display:grid;gap:9px}
-.choice{border:1.5px solid var(--line);background:#fff;border-radius:12px;text-align:left;padding:12px;display:flex;gap:10px;align-items:flex-start;transition:.15s}
-.choice:active{transform:scale(.99)} .choice.selected{border-color:var(--blue);background:#eef7ff;box-shadow:0 0 0 2px #1f5f9914}
-.choice .emoji{width:36px;height:36px;border-radius:10px;background:#edf3f8;display:grid;place-items:center;font-size:20px;flex-shrink:0}
-.choice strong{display:block;font-size:13px;margin:1px 0 4px}.choice p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}.effect{font-size:10px;color:var(--green);font-weight:800;margin-top:5px}
-.primary{width:100%;border:0;border-radius:12px;background:var(--navy);color:white;padding:14px;font-weight:800;margin-top:12px;box-shadow:0 4px 0 #071b30}
-.primary:disabled{opacity:.4;cursor:not-allowed}.secondary{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px;font-weight:700;color:var(--navy)}
-.notice{background:#fff8e7;border:1px solid #f1dfa8;border-radius:12px;padding:11px 12px;font-size:11px;line-height:1.6;color:#755a1b}
-.log{font-size:12px;line-height:1.65;margin:0;padding-left:18px}.log li+li{margin-top:5px}
-.footer{font-size:10px;text-align:center;color:#8290a0;padding:8px 14px 18px}
-.overlay{position:fixed;inset:0;background:#0c1f34a8;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.overlay.show{display:flex}.modal{max-width:420px;width:100%;background:white;border-radius:18px;padding:22px;text-align:center}.modal .big{font-size:46px}.modal h2{font-size:22px;margin:8px 0}.modal p{font-size:13px;line-height:1.7;color:var(--muted)}
-@media(min-width:620px){main{grid-template-columns:1fr 1fr;align-items:start}.wide{grid-column:1/-1}.choices{grid-template-columns:1fr 1fr}}
+:root{--navy:#102c4c;--blue:#1768a8;--sky:#eaf4fc;--ink:#172638;--muted:#65778b;--line:#dce6ef;--gold:#f3c65e;--green:#2d9b70;--red:#c65a5a}
+*{box-sizing:border-box}body{margin:0;background:#eaf0f6;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
+button{font:inherit;cursor:pointer}.app{max-width:760px;margin:auto;min-height:100dvh;background:#f7fafd;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+.top{background:linear-gradient(145deg,#102c4c,#1c6093);color:white;padding:16px 16px 18px;border-bottom:4px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:8px;color:#dceaf8;font-size:11px;font-weight:800;letter-spacing:.12em}.logo{width:32px;height:32px;display:grid;place-items:center;background:var(--gold);color:var(--navy);border-radius:10px;font-size:18px}
+h1{font-size:21px;margin:11px 0 4px}.subtitle{font-size:11px;color:#dceaf8}.seasonrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.pill{font-size:11px;font-weight:800;padding:6px 9px;border-radius:99px;background:#ffffff1c;border:1px solid #ffffff35}
+main{padding:13px;display:grid;gap:12px}.page{display:none;gap:12px}.page.active{display:grid}
+.card{background:white;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 3px 12px #102c4c08}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.sectionhead h2{font-size:15px;margin:0}.tag{font-size:10px;font-weight:800;color:var(--blue);background:var(--sky);padding:5px 8px;border-radius:99px}
+.player{display:flex;align-items:center;gap:12px}.avatar{width:76px;height:84px;flex:none;border-radius:14px;background:linear-gradient(145deg,#dceefa,#9fc8e6);display:grid;place-items:center;font-size:40px}.player h2{font-size:18px;margin:0 0 4px}.player p{font-size:11px;color:var(--muted);margin:3px 0}.traits{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.trait{font-size:10px;padding:5px 7px;border-radius:7px;background:#fff7df;border:1px solid #f1e1ad;color:#80600e}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini{border:1px solid var(--line);border-radius:12px;padding:10px}.mini .label{font-size:10px;color:var(--muted);font-weight:700}.mini strong{display:block;font-size:19px;color:var(--navy);margin-top:3px}.bar{height:8px;border-radius:99px;background:#e8eef4;overflow:hidden;margin-top:6px}.bar span{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#5ba6d9,#1768a8)}.bar.green span{background:linear-gradient(90deg,#66c79c,#268c64)}.bar.gold span{background:linear-gradient(90deg,#f4d47b,#d9a72f)}
+.statrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #edf1f5}.statrow:last-child{border-bottom:0}.statname{font-size:12px;font-weight:800}.statdesc{font-size:10px;color:var(--muted);margin-top:3px}.statvalue{font-size:14px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}.statmeter{grid-column:1/-1;margin-top:-3px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{font-size:11px;padding:6px 8px;border-radius:8px;background:#f0f5fa;color:#40566d}
+.choices{display:grid;gap:8px}.choice{width:100%;border:1.5px solid var(--line);background:white;border-radius:12px;padding:10px;text-align:left;display:flex;gap:10px;align-items:center}.choice.selected{border-color:var(--blue);background:#eef7ff;box-shadow:0 0 0 2px #1768a814}.emoji{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:10px;background:#edf4fa;font-size:19px}.choice strong{font-size:12px;display:block}.choice p{font-size:10px;color:var(--muted);margin:3px 0 0;line-height:1.5}.effect{font-size:10px;color:var(--green);font-weight:800;margin-top:3px;display:block}
+.primary{width:100%;border:0;border-radius:12px;padding:13px;background:var(--navy);color:white;font-weight:800;margin-top:10px;box-shadow:0 4px 0 #071b30}.primary:disabled{opacity:.4}.secondary{border:1px solid var(--line);background:white;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:800;color:var(--navy)}
+.notice{font-size:10px;line-height:1.6;color:#755a1b;background:#fff8e7;border:1px solid #f1dfa8;border-radius:11px;padding:10px}.log{font-size:11px;line-height:1.7;margin:0;padding-left:18px}.log li+li{margin-top:5px}
+.profilegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.profileitem{border:1px solid var(--line);border-radius:11px;padding:10px}.profileitem span{display:block;color:var(--muted);font-size:10px}.profileitem strong{font-size:12px;display:block;margin-top:4px}.history{display:grid;gap:8px}.historyitem{display:flex;gap:9px;align-items:flex-start;font-size:11px;line-height:1.5}.historyage{background:var(--sky);color:var(--blue);font-weight:900;padding:5px 7px;border-radius:7px;white-space:nowrap}
+.bottomnav{position:fixed;z-index:5;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,760px);display:grid;grid-template-columns:repeat(4,1fr);padding:7px 7px calc(7px + env(safe-area-inset-bottom));background:#ffffffef;backdrop-filter:blur(14px);border-top:1px solid var(--line);box-shadow:0 -4px 18px #102c4c10}.navbtn{border:0;background:transparent;color:#718197;padding:5px 1px 3px;border-radius:10px;font-size:9px;font-weight:800;display:grid;justify-items:center;gap:3px}.navbtn .navicon{font-size:20px;line-height:1.1}.navbtn.active{color:var(--blue);background:#eaf4fc}
+.footer{text-align:center;color:#8795a4;font-size:9px;padding:12px}
+.overlay{position:fixed;inset:0;background:#0c1f34a8;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.overlay.show{display:flex}.modal{max-width:420px;width:100%;background:white;border-radius:18px;padding:22px;text-align:center}.modal .big{font-size:44px}.modal h2{font-size:21px;margin:8px 0}.modal p{font-size:12px;line-height:1.7;color:var(--muted)}
+@media(min-width:620px){main{padding:18px}.page.active{grid-template-columns:1fr 1fr;align-items:start}.span2{grid-column:1/-1}.choices{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
-  <div class="brand"><div class="logo">⚾</div><span>BASEBALL CAREER BUILDER</span></div>
-  <h1>プロ野球育成記録</h1>
-  <div class="subtitle">親の選択が、未来のスターをつくる。</div>
-  <div class="seasonrow"><div class="pill" id="agePill">5歳・第1週</div><div class="pill" id="weekPill">全864週中 241週目</div><div class="pill" id="stagePill">幼児期</div></div>
+ <div class="brand"><div class="logo">⚾</div><span>BASEBALL CAREER BUILDER</span></div>
+ <h1>プロ野球育成記録</h1><div class="subtitle">親の選択が、未来のスターをつくる。</div>
+ <div class="seasonrow"><span class="pill" id="agePill">0歳・第1週</span><span class="pill" id="weekPill">全864週中 1週目</span><span class="pill" id="stagePill">乳児期</span></div>
 </header>
 <main>
-  <section class="card wide">
-    <div class="sectionhead"><h2>👶 育成選手</h2><span class="tag">プロトタイプ</span></div>
-    <div class="player">
-      <div class="avatar" id="avatar">👶🏻</div>
-      <div style="flex:1;min-width:0">
-        <h2 id="playerName">あなたの子ども</h2>
-        <p id="playerInfo">5歳 · まだポジションは未定</p>
-        <p id="personality">性格：好奇心旺盛</p>
-        <div class="traits" id="traits"><span class="trait">運動神経がよさそう</span><span class="trait">筋肉がつきやすいかも</span></div>
-      </div>
-    </div>
-  </section>
+<section class="page active" id="page-home">
+ <article class="card span2"><div class="sectionhead"><h2>🏠 選手ホーム</h2><span class="tag">育成状況</span></div>
+  <div class="player"><div class="avatar" id="avatar">👶🏻</div><div style="flex:1;min-width:0"><h2 id="playerName">あなたの子ども</h2><p id="playerInfo">0歳 · 未来のプロ野球選手</p><p id="personalityHome">性格：好奇心旺盛</p><div class="traits" id="traitsHome"></div></div></div>
+ </article>
+ <article class="card"><div class="sectionhead"><h2>💚 コンディション</h2><span id="conditionText" class="small">元気</span></div>
+  <div class="statrow"><div class="statname">体力</div><div class="statvalue" id="energyNum">82/100</div><div class="bar green statmeter"><span id="energyBar" style="width:82%"></span></div></div>
+  <div class="statrow"><div class="statname">やる気</div><div class="statvalue" id="motivationNum">75/100</div><div class="bar gold statmeter"><span id="motivationBar" style="width:75%"></span></div></div>
+ </article>
+ <article class="card"><div class="sectionhead"><h2>📊 総合能力</h2><span class="tag">MAX 1000</span></div><div class="mini"><span class="label">野球能力の合計目安</span><strong id="overall">—</strong><div class="small">各能力の成長状況は専用タブで確認できます。</div></div><div class="chips" style="margin-top:9px"><span class="chip" id="typeChip">成長タイプ：未知数</span><span class="chip" id="positionChip">ポジション：未定</span></div></article>
+ <article class="card span2"><div class="sectionhead"><h2>🗓️ 今週の育成方針</h2><span class="tag">4択から1つ</span></div><p id="prompt" style="font-size:12px;line-height:1.6;margin:0 0 10px">今週はどんな経験をさせますか？</p><div class="choices" id="choices"></div><button id="nextBtn" class="primary" disabled>選択した行動で1週間進める</button></article>
+ <article class="card span2"><div class="sectionhead"><h2>📒 最近の育成日誌</h2><button class="secondary" id="resetBtn">最初から</button></div><ol class="log" id="log"></ol></article>
+</section>
 
-  <section class="card">
-    <div class="sectionhead"><h2>💚 コンディション</h2><span id="conditionText" class="small">元気</span></div>
-    <div class="energyrow"><span>体力</span><div class="energy"><span id="energyBar" style="width:82%"></span></div><strong id="energyNum">82/100</strong></div>
-    <div class="energyrow"><span>やる気</span><div class="energy"><span id="motivationBar" style="width:75%;background:#e2b746"></span></div><strong id="motivationNum">75/100</strong></div>
-    <p class="small" style="margin:12px 0 0">体力が低いと練習効果が下がり、休息で回復します。</p>
-  </section>
+<section class="page" id="page-batter">
+ <article class="card span2"><div class="sectionhead"><h2>⚾ 野手スキル</h2><span class="tag">打撃・走塁・守備</span></div><p class="small" style="margin:0 0 10px">野手としての能力を詳しく確認できます。各能力は最大1000です。</p><div id="batterStats"></div></article>
+ <article class="card span2"><div class="sectionhead"><h2>✨ 野手の成長メモ</h2></div><p class="small" id="batterNote" style="line-height:1.7;margin:0">練習や日々の経験を重ねることで、少しずつ能力が伸びていきます。</p></article>
+</section>
 
-  <section class="card">
-    <div class="sectionhead"><h2>📊 野球能力</h2><span class="tag">MAX 1000</span></div>
-    <div class="stats" id="stats"></div>
-    <p class="small" style="margin:10px 0 0">数値は原型用の仮データです。年齢に応じて表示項目が増えます。</p>
-  </section>
+<section class="page" id="page-pitcher">
+ <article class="card span2"><div class="sectionhead"><h2>🥎 投手スキル</h2><span class="tag">球速・制球・変化球</span></div><p class="small" style="margin:0 0 10px">投手としての能力を詳しく確認できます。各能力は最大1000です。</p><div id="pitcherStats"></div></article>
+ <article class="card span2"><div class="sectionhead"><h2>🧢 投手適性</h2></div><div class="profilegrid"><div class="profileitem"><span>投手タイプ</span><strong id="pitchType">育成中</strong></div><div class="profileitem"><span>利き腕</span><strong id="throwHand">未設定</strong></div><div class="profileitem"><span>得意球種</span><strong id="bestPitch">これから発見</strong></div><div class="profileitem"><span>投手適性</span><strong id="pitchAptitude">未知数</strong></div></div></article>
+</section>
 
-  <section class="card wide">
-    <div class="sectionhead"><h2>🗓️ 今週の育成方針</h2><span class="tag">4択から1つ</span></div>
-    <p id="prompt" style="font-size:13px;margin:0 0 12px;line-height:1.6">今週はどんな経験をさせますか？選択によって能力やコンディションが変わります。</p>
-    <div class="choices" id="choices"></div>
-    <button id="nextBtn" class="primary" disabled>選択肢を選んで1週間進める</button>
-  </section>
-
-  <section class="card wide">
-    <div class="sectionhead"><h2>📒 育成日誌</h2><button class="secondary" id="resetBtn">最初から</button></div>
-    <ol class="log" id="log"><li>誕生しました！毎週の選択で、少しずつ成長させましょう。</li></ol>
-  </section>
-  <div class="notice wide">これはゲームの原型です。選択肢・成長値・ドラフト判定は仮設定で、あとから一緒に調整できます。データ保存機能はまだありません。</div>
+<section class="page" id="page-personal">
+ <article class="card span2"><div class="sectionhead"><h2>👤 個人詳細</h2><span class="tag">プロフィール</span></div><div class="player"><div class="avatar" id="avatarDetail">👶🏻</div><div><h2 id="detailName">あなたの子ども</h2><p id="detailInfo">0歳 · プロ野球選手を目指して</p><p id="detailPersonality">性格：好奇心旺盛</p></div></div></article>
+ <article class="card span2"><div class="sectionhead"><h2>🪪 基本プロフィール</h2></div><div class="profilegrid">
+  <div class="profileitem"><span>年齢</span><strong id="detailAge">0歳</strong></div><div class="profileitem"><span>学年・年代</span><strong id="detailStage">乳児期</strong></div>
+  <div class="profileitem"><span>投打</span><strong id="detailHand">未設定</strong></div><div class="profileitem"><span>ポジション</span><strong id="detailPosition">未定</strong></div>
+  <div class="profileitem"><span>性格</span><strong id="detailPersonalityShort">好奇心旺盛</strong></div><div class="profileitem"><span>現在の調子</span><strong id="detailCondition">元気</strong></div>
+ </div></article>
+ <article class="card span2"><div class="sectionhead"><h2>🌱 生まれ持った特徴</h2><span class="tag">才能は非公開</span></div><div class="chips" id="traitsDetail"></div><p class="small" style="line-height:1.7;margin-bottom:0">生まれ持った才能や成長の上限は、ゲーム内では数値を隠して表現します。日々の経験から少しずつ個性が見えてきます。</p></article>
+ <article class="card span2"><div class="sectionhead"><h2>💙 好きなもの・苦手なもの</h2></div><div class="profilegrid"><div class="profileitem"><span>好きなもの</span><strong id="likes">ボール遊び・家族との時間</strong></div><div class="profileitem"><span>苦手なもの</span><strong id="dislikes">大きな音・早起き</strong></div></div></article>
+ <article class="card span2"><div class="sectionhead"><h2>📈 成長の記録</h2></div><div class="history" id="history"><div class="historyitem"><span class="historyage">誕生</span><span>新しい家族が誕生しました。</span></div></div></article>
+</section>
+<div class="footer">PROTO v0.2 · 4タブ育成画面</div>
 </main>
-<div class="footer">PROTO v0.1 · スマートフォン向け育成シミュレーション</div>
+<nav class="bottomnav" aria-label="メインメニュー">
+ <button class="navbtn active" data-tab="home"><span class="navicon">🏠</span>ホーム</button>
+ <button class="navbtn" data-tab="batter"><span class="navicon">⚾</span>野手スキル</button>
+ <button class="navbtn" data-tab="pitcher"><span class="navicon">🥎</span>投手スキル</button>
+ <button class="navbtn" data-tab="personal"><span class="navicon">👤</span>個人詳細</button>
+</nav>
 </div>
 <div class="overlay" id="overlay"><div class="modal"><div class="big" id="resultEmoji">🎉</div><h2 id="resultTitle">1週間経過！</h2><p id="resultText"></p><button class="primary" id="closeModal">続ける</button></div></div>
 <script>
-const initial = () => ({
-  age:0, week:1, totalWeeks:864, energy:82, motivation:75,
-  stats:{power:42, contact:55, speed:63, fielding:48, baseballIQ:36},
-  selected:null, log:["誕生しました！毎週の選択で、少しずつ成長させましょう。"],
-  traits:["運動神経がよさそう","筋肉がつきやすいかも"], personality:"好奇心旺盛"
-});
+const initial=()=>({age:0,week:1,totalWeeks:864,energy:82,motivation:75,selected:null,
+ stats:{power:42,contact:55,speed:63,fielding:48,arm:40,baseballIQ:36,velocity:35,control:38,stamina:42,breaking:20,curve:15,slider:10,changeup:8},
+ log:["誕生しました！毎週の選択で、少しずつ成長させましょう。"],history:[{age:"誕生",text:"新しい家族が誕生しました。"}],
+ traits:["運動神経がよさそう","筋肉がつきやすいかも"],personality:"好奇心旺盛",likes:"ボール遊び・家族との時間",dislikes:"大きな音・早起き"});
 let state=initial();
 const allChoices=[
- {id:"ball",icon:"⚾",title:"公園でボール遊び",desc:"投げる・捕る・打つを楽しく体験。",effect:"野球センス・ミートが少し成長",gain:{contact:3,baseballIQ:2},energy:-12,mot:5},
- {id:"run",icon:"🏃",title:"外で思い切り体を動かす",desc:"走ったり跳んだり、基礎体力をつける。",effect:"走力・体力が成長",gain:{speed:4},energy:-18,mot:4},
- {id:"book",icon:"📚",title:"一緒に本を読む",desc:"考える力や集中する習慣を育てる。",effect:"野球知識・やる気が成長",gain:{baseballIQ:4},energy:4,mot:7},
- {id:"rest",icon:"🛌",title:"ゆっくり休んで好きに遊ぶ",desc:"疲れを取り、気持ちをリフレッシュ。",effect:"体力・やる気を回復",gain:{},energy:22,mot:12},
- {id:"bat",icon:"💥",title:"バッティング練習",desc:"年齢に合わせて楽しくスイング。",effect:"パワー・ミートが成長",gain:{power:5,contact:2},energy:-20,mot:1},
- {id:"catch",icon:"🧤",title:"キャッチボール",desc:"ボールに慣れ、投げる・捕る感覚を磨く。",effect:"守備・野球センスが成長",gain:{fielding:4,baseballIQ:2},energy:-13,mot:3}
+{id:"ball",icon:"⚾",title:"公園でボール遊び",desc:"投げる・捕る・打つを楽しく体験。",effect:"ミート・野球センスが少し成長",gain:{contact:3,baseballIQ:2,control:1},energy:-12,mot:5},
+{id:"run",icon:"🏃",title:"外で思い切り体を動かす",desc:"走ったり跳んだり、基礎体力をつける。",effect:"走力・スタミナが成長",gain:{speed:4,stamina:2},energy:-18,mot:4},
+{id:"book",icon:"📚",title:"一緒に本を読む",desc:"考える力や集中する習慣を育てる。",effect:"野球知識・やる気が成長",gain:{baseballIQ:4,control:1},energy:4,mot:7},
+{id:"rest",icon:"🛌",title:"ゆっくり休んで好きに遊ぶ",desc:"疲れを取り、気持ちをリフレッシュ。",effect:"体力・やる気を回復",gain:{},energy:22,mot:12},
+{id:"bat",icon:"💥",title:"バッティング練習",desc:"年齢に合わせて楽しくスイング。",effect:"パワー・ミートが成長",gain:{power:5,contact:2},energy:-20,mot:1},
+{id:"catch",icon:"🧤",title:"キャッチボール",desc:"ボールに慣れ、投げる・捕る感覚を磨く。",effect:"肩力・守備・コントロールが成長",gain:{fielding:3,arm:3,control:2},energy:-13,mot:3},
+{id:"pitch",icon:"🥎",title:"投球フォーム練習",desc:"無理のない範囲で投げ方を覚える。",effect:"球速・制球が少し成長",gain:{velocity:3,control:4},energy:-16,mot:2}
 ];
-function currentChoices(){
-  if(state.age<7) return [allChoices[0],allChoices[1],allChoices[2],allChoices[3]];
-  if(state.age<12) return [allChoices[0],allChoices[1],allChoices[4],allChoices[3]];
-  if(state.age<15) return [allChoices[4],allChoices[5],allChoices[1],allChoices[3]];
-  return [
-    {...allChoices[4],title:"本格バッティング練習",desc:"フォームとスイングを磨き、長打力を伸ばす。",gain:{power:8,contact:2},energy:-23},
-    {...allChoices[5],title:"守備・キャッチボール練習",gain:{fielding:7,baseballIQ:3},energy:-17},
-    {...allChoices[1],title:"走り込み・瞬発力トレーニング",gain:{speed:6},energy:-24},
-    {...allChoices[3],title:"休養・コンディション調整",energy:26,mot:8}
-  ];
-}
-const statMeta=[
- ["power","パワー"],["contact","ミート"],["speed","走力"],["fielding","守備力"],["baseballIQ","野球センス"]
-];
-function renderStats(){
- const el=document.getElementById("stats"); el.innerHTML="";
- statMeta.forEach(([key,label])=>{
-  const v=state.stats[key]; const d=document.createElement("div");d.className="stat";
-  d.innerHTML=`<div class="statline"><span>${label}</span><span class="num">${v}</span></div><div class="meter"><span style="width:${Math.min(100,v/10)}%"></span></div><div class="small" style="margin-top:5px">${v<100?"成長途中":v<300?"基礎が身についてきた":"有望な能力"}</div>`;
-  el.appendChild(d);
- });
-}
-function stageName(age){return age<3?"乳児期":age<7?"幼児期":age<13?"小学生":age<16?"中学生":age<18?"高校生":"ドラフト";}
+function currentChoices(){if(state.age<7)return[allChoices[0],allChoices[1],allChoices[2],allChoices[3]];if(state.age<12)return[allChoices[0],allChoices[1],allChoices[4],allChoices[3]];if(state.age<15)return[allChoices[4],allChoices[5],allChoices[1],allChoices[3]];return[allChoices[4],allChoices[5],allChoices[6],{...allChoices[3],energy:26,mot:8}];}
+const batterMeta=[["contact","ミート","ボールを捉える正確さ"],["power","パワー","打球の強さ・長打力"],["speed","走力","走塁や守備範囲に関わる速さ"],["fielding","守備力","打球を処理する技術"],["arm","肩力","送球の強さ"],["baseballIQ","野球センス","状況判断や野球への理解"]];
+const pitcherMeta=[["velocity","球速","ストレートの球速につながる力"],["control","コントロール","狙った場所に投げる能力"],["stamina","スタミナ","長いイニングを投げる体力"],["breaking","変化球総合","変化球を操る基礎能力"],["curve","カーブ","縦に大きく曲がる変化球"],["slider","スライダー","横方向への鋭い変化"],["changeup","チェンジアップ","打者のタイミングを外す球"]];
+function stageName(a){return a<3?"乳児期":a<7?"幼児期":a<13?"小学生":a<16?"中学生":a<18?"高校生":"ドラフト";}
+function statRows(meta){return meta.map(([k,n,d])=>{let v=state.stats[k];return `<div class="statrow"><div><div class="statname">${n}</div><div class="statdesc">${d}</div></div><div class="statvalue">${v}<span class="small"> /1000</span></div><div class="bar statmeter"><span style="width:${Math.min(100,v/10)}%"></span></div></div>`}).join("");}
 function render(){
- document.getElementById("agePill").textContent=`${state.age}歳・第${state.week}週`;
- document.getElementById("weekPill").textContent=`全864週中 ${Math.min(864,(state.age*48)+state.week)}週目`;
- document.getElementById("stagePill").textContent=stageName(state.age);
- document.getElementById("playerInfo").textContent=`${state.age}歳 · ${state.age<12?"ポジションは未定":state.stats.power>=state.stats.contact+30?"強打者タイプ":"バランス型候補"}`;
- document.getElementById("energyBar").style.width=state.energy+"%";
- document.getElementById("energyNum").textContent=state.energy+"/100";
- document.getElementById("motivationBar").style.width=state.motivation+"%";
- document.getElementById("motivationNum").textContent=state.motivation+"/100";
- document.getElementById("conditionText").textContent=state.energy<25?"疲労気味":state.energy<50?"少し疲れ":"元気";
- document.getElementById("stats").innerHTML="";renderStats();
- const box=document.getElementById("choices");box.innerHTML="";
- currentChoices().forEach(c=>{
-  const b=document.createElement("button");b.className="choice"+(state.selected===c.id?" selected":"");b.innerHTML=`<span class="emoji">${c.icon}</span><span><strong>${c.title}</strong><p>${c.desc}</p><span class="effect">${c.effect}</span></span>`;
-  b.onclick=()=>{state.selected=c.id;render();};box.appendChild(b);
- });
- document.getElementById("nextBtn").disabled=!state.selected;
- document.getElementById("nextBtn").textContent=state.age>=18?"ドラフト結果を見る":"選択した行動で1週間進める";
- document.getElementById("prompt").textContent=state.age<7?"今週はどんな経験をさせますか？遊びや生活習慣が、将来の土台になります。":state.age<13?"少しずつ得意なことが見えてくる時期。今週の経験を選びましょう。":state.age<18?"野球の専門練習も選べるようになりました。伸ばしたい能力を考えて選ぼう。":"18歳になりました。育成の成果をもとにドラフト評価を確認しましょう。";
- document.getElementById("log").innerHTML=state.log.slice(-5).map(x=>`<li>${x}</li>`).join("");
+const weekNum=Math.min(864,state.age*48+state.week);
+["agePill"].forEach(id=>document.getElementById(id).textContent=`${state.age}歳・第${state.week}週`);
+document.getElementById("weekPill").textContent=`全864週中 ${weekNum}週目`;document.getElementById("stagePill").textContent=stageName(state.age);
+document.getElementById("playerInfo").textContent=`${state.age}歳 · ${state.age<12?"ポジションは未定":state.stats.power>state.stats.contact+30?"強打者タイプ":"バランス型候補"}`;
+document.getElementById("personalityHome").textContent=`性格：${state.personality}`;
+document.getElementById("traitsHome").innerHTML=state.traits.map(t=>`<span class="trait">${t}</span>`).join("");
+document.getElementById("energyBar").style.width=state.energy+"%";document.getElementById("energyNum").textContent=state.energy+"/100";
+document.getElementById("motivationBar").style.width=state.motivation+"%";document.getElementById("motivationNum").textContent=state.motivation+"/100";
+let condition=state.energy<25?"疲労気味":state.energy<50?"少し疲れ":"元気";document.getElementById("conditionText").textContent=condition;
+document.getElementById("overall").textContent=Object.values(state.stats).reduce((a,b)=>a+b,0).toLocaleString();
+document.getElementById("typeChip").textContent="成長タイプ："+(state.stats.speed>state.stats.power+20?"俊足型候補":"成長中");
+document.getElementById("positionChip").textContent="ポジション："+(state.age<12?"未定":"適性を確認中");
+document.getElementById("batterStats").innerHTML=statRows(batterMeta);document.getElementById("pitcherStats").innerHTML=statRows(pitcherMeta);
+document.getElementById("batterNote").textContent=state.stats.contact>state.stats.power?"ミートを活かした打撃が伸びてきています。":"パワーとミートのバランスを見ながら育てていきましょう。";
+document.getElementById("pitchType").textContent=state.stats.velocity>state.stats.control+15?"球威型候補":"バランス型候補";document.getElementById("throwHand").textContent="右投げ（仮）";document.getElementById("bestPitch").textContent=state.stats.curve>=state.stats.slider?"カーブ":"スライダー";document.getElementById("pitchAptitude").textContent=state.stats.control>50?"制球型候補":"これから発見";
+document.getElementById("detailName").textContent="あなたの子ども";document.getElementById("detailInfo").textContent=`${state.age}歳 · プロ野球選手を目指して`;document.getElementById("detailPersonality").textContent=`性格：${state.personality}`;
+document.getElementById("detailAge").textContent=state.age+"歳";document.getElementById("detailStage").textContent=stageName(state.age);document.getElementById("detailHand").textContent="右投げ・右打ち（仮）";document.getElementById("detailPosition").textContent=state.age<12?"未定":"適性を確認中";document.getElementById("detailPersonalityShort").textContent=state.personality;document.getElementById("detailCondition").textContent=condition;
+document.getElementById("traitsDetail").innerHTML=state.traits.map(t=>`<span class="trait">${t}</span>`).join("");document.getElementById("likes").textContent=state.likes;document.getElementById("dislikes").textContent=state.dislikes;
+document.getElementById("history").innerHTML=state.history.slice(-8).map(h=>`<div class="historyitem"><span class="historyage">${h.age}</span><span>${h.text}</span></div>`).join("");
+let box=document.getElementById("choices");box.innerHTML="";currentChoices().forEach(c=>{let b=document.createElement("button");b.className="choice"+(state.selected===c.id?" selected":"");b.innerHTML=`<span class="emoji">${c.icon}</span><span><strong>${c.title}</strong><p>${c.desc}</p><span class="effect">${c.effect}</span></span>`;b.onclick=()=>{state.selected=c.id;render();};box.appendChild(b);});
+document.getElementById("nextBtn").disabled=!state.selected;document.getElementById("nextBtn").textContent=state.age>=18?"ドラフト結果を見る":"選択した行動で1週間進める";
+document.getElementById("prompt").textContent=state.age<7?"遊びや生活習慣が、将来の土台になります。今週の経験を選びましょう。":state.age<13?"少しずつ得意なことが見えてくる時期。今週の経験を選びましょう。":"野球の専門練習も選べる時期です。伸ばしたい能力を考えて選ぼう。";
+document.getElementById("log").innerHTML=state.log.slice(-5).map(x=>`<li>${x}</li>`).join("");
 }
-function showModal(title,text,emoji="✨"){
- document.getElementById("resultTitle").textContent=title;document.getElementById("resultText").textContent=text;document.getElementById("resultEmoji").textContent=emoji;document.getElementById("overlay").classList.add("show");
-}
-document.getElementById("nextBtn").onclick=()=>{
- if(!state.selected)return;
- if(state.age>=18){draft();return;}
- const c=currentChoices().find(x=>x.id===state.selected);if(!c)return;
- let summary=c.title+"。";
- Object.entries(c.gain).forEach(([k,g])=>{let bonus=state.energy<25?0.5:1;let delta=Math.max(1,Math.round(g*bonus));state.stats[k]=Math.min(1000,state.stats[k]+delta);});
- state.energy=Math.max(0,Math.min(100,state.energy+c.energy));
- state.motivation=Math.max(0,Math.min(100,state.motivation+c.mot));
- if(state.energy<20){summary+=" 疲労がたまっているようです。";}
- state.log.push(`${state.age}歳・第${state.week}週：${summary}`);
- state.week++;if(state.week>48){state.week=1;state.age++;if(state.age===6){state.traits.push("新しい得意分野を探し中");}}
- state.selected=null;
- if(state.age>=18&&state.week>=48){state.age=18;state.week=48;}
- render();
- if(state.age===18&&state.week===48)showModal("18歳になりました！","育成の集大成です。もう1週間進めるとドラフト評価が行われます。","🎓");
- else showModal("1週間経過！",summary+" 能力やコンディションが変化しました。","📈");
-};
-function draft(){
- const total=Object.values(state.stats).reduce((a,b)=>a+b,0);
- let title,txt,emo;
- if(total>900){title="ドラフト1位指名！";txt="圧倒的な能力を評価され、ドラフト1位で指名されました！";emo="🏆";}
- else if(total>650){title="上位指名でプロ入り！";txt="高い能力と将来性を評価され、上位で指名されました。";emo="🎉";}
- else if(total>450){title="ドラフト指名！";txt="努力が実を結び、プロ野球選手への切符をつかみました。";emo="⚾";}
- else if(total>300){title="育成選手として指名！";txt="育成契約からプロの世界へ。ここからが勝負です。";emo="💪";}
- else {title="指名漏れ…";txt="今回は指名されませんでした。でも、これは仮の原型。能力や判定基準は今後一緒に調整できます。";emo="📣";}
- document.getElementById("nextBtn").disabled=true;showModal(title,txt,emo);
-}
+function showModal(title,text,emoji="✨"){document.getElementById("resultTitle").textContent=title;document.getElementById("resultText").textContent=text;document.getElementById("resultEmoji").textContent=emoji;document.getElementById("overlay").classList.add("show");}
+document.querySelectorAll(".navbtn").forEach(btn=>btn.addEventListener("click",()=>{let tab=btn.dataset.tab;document.querySelectorAll(".navbtn").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+tab));window.scrollTo({top:0,behavior:"smooth"});}));
+document.getElementById("nextBtn").onclick=()=>{if(!state.selected)return;if(state.age>=18){draft();return;}let c=currentChoices().find(x=>x.id===state.selected);if(!c)return;let summary=c.title+"。";Object.entries(c.gain).forEach(([k,g])=>{let delta=Math.max(1,Math.round(g*(state.energy<25?.5:1)));state.stats[k]=Math.min(1000,state.stats[k]+delta);});state.energy=Math.max(0,Math.min(100,state.energy+c.energy));state.motivation=Math.max(0,Math.min(100,state.motivation+c.mot));if(state.energy<20)summary+=" 疲労がたまっているようです。";state.log.push(`${state.age}歳・第${state.week}週：${summary}`);state.week++;if(state.week>48){state.week=1;state.age++;if(state.age===6){state.traits.push("新しい得意分野を探し中");}state.history.push({age:state.age+"歳",text:stageName(state.age)+"に進みました。新しい経験を重ねていきます。"});}state.selected=null;render();showModal("1週間経過！",summary+" 能力やコンディションが変化しました。","📈");};
+function draft(){let total=Object.values(state.stats).reduce((a,b)=>a+b,0);let title,txt,emo;if(total>1100){title="ドラフト1位指名！";txt="高い能力と将来性を評価され、ドラフト1位で指名されました！";emo="🏆";}else if(total>800){title="上位指名でプロ入り！";txt="努力が実を結び、上位で指名されました。";emo="🎉";}else if(total>550){title="ドラフト指名！";txt="プロ野球選手への切符をつかみました。";emo="⚾";}else if(total>350){title="育成選手として指名！";txt="育成契約からプロの世界へ。ここからが勝負です。";emo="💪";}else{title="指名漏れ…";txt="今回は指名されませんでした。育成の道のりはここで一区切りです。";emo="📣";}document.getElementById("nextBtn").disabled=true;showModal(title,txt,emo);}
 document.getElementById("closeModal").onclick=()=>document.getElementById("overlay").classList.remove("show");
 document.getElementById("resetBtn").onclick=()=>{state=initial();render();showModal("育成をリセットしました","新しい育成を始めましょう。","⚾");};
 render();
 </script>
-</body>
-</html>
+</body></html>
